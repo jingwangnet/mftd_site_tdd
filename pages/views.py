@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("<h1>The meandco Homepage</h1>")
+    return render(request, "base.html")
