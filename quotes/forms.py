@@ -19,5 +19,9 @@ class QuoteForm(forms.ModelForm):
             "sitestatus",
             "priority",
             "jobfile",
-            "quotedate" "quoteprice",
+            "quotedate",
+            "quoteprice",
         ]
+        widgets = {
+            "quotedate": forms.SelectDateWidget(),
+        }
