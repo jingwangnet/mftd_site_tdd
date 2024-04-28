@@ -18,10 +18,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.views.generic.base import TemplateView
+from quotes.views import Register
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("login/", LoginView.as_view(), name="login"),
+    path("login/", LogoutView.as_view(), name="logout"),
+    path(
+        "register/success/",
+        TemplateView.as_view(template_name="registration/success.html"),
+        name="register-success",
+    ),
+    path("register/", Register.as_view(), name="register"),
     path("quote/", include("quotes.urls", namespace="quotes")),
     path("", include("pages.urls", namespace="pages")),
 ]
