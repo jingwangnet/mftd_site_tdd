@@ -17,7 +17,11 @@
         <img src="{% static 'logo.jpg' %}" alt="logo">
         <span style="float: right;">
           {% if user.is_authenticated %}
-          Hello, {{ user.username }}. <a href="{% url 'logout' %}?next=/">log out</a>
+          Hello, {{ user.username }}. 
+          <form action="{% url 'logout' %}" method='POST'>
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+          </form>
           {% else %}
           Not login in. <a href="{% url 'login'%}?next=/">Log in</a>
           {% endif %}
