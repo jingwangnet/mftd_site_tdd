@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .models import Quote
 from .forms import QuoteForm
@@ -14,6 +15,16 @@ class QuoteList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(QuoteList, self).get_context_data(**kwargs)
+        context["page_list"] = Page.objects.all()
+        return context
+
+
+class QuoteDetail(DetailView):
+    model = Quote
+    context_object_name = "quote"
+
+    def get_context_data(self, **kwargs):
+        context = super(QuoteDetail, self).get_context_data(**kwargs)
         context["page_list"] = Page.objects.all()
         return context
 
